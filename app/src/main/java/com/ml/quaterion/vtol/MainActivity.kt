@@ -29,7 +29,8 @@ import androidx.core.content.ContextCompat
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.LifecycleOwner
 import com.google.common.util.concurrent.ListenableFuture
-import com.ml.quaterion.vtol.databinding.ActivityMainBinding
+import com.ml.quaterion.facenetdetection.R
+import com.ml.quaterion.facenetdetection.databinding.ActivityMainBinding
 import com.ml.quaterion.vtol.model.FaceNetModel
 import com.ml.quaterion.vtol.model.Models
 import java.io.*

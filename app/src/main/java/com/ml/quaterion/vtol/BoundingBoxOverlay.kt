@@ -22,7 +22,7 @@ class BoundingBoxOverlay( context: Context , attributeSet: AttributeSet )
     var frameHeight = 0
     var frameWidth = 0
 
-    private var cameraFacing : Int = CameraSelector.LENS_FACING_FRONT
+    var cameraFacing : Int = CameraSelector.LENS_FACING_FRONT
 
     // This var is assigned in FrameAnalyser.kt
     var faceBoundingBoxes: ArrayList<Prediction>? = null
