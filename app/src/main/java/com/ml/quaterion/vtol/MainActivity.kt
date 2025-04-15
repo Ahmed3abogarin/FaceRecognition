@@ -1,18 +1,4 @@
-/*
- * Copyright 2023 Shubham Panchal
- * Licensed under the Apache License, Version 2.0 (the "License");
- * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package com.ml.quaterion.facenetdetection
+package com.ml.quaterion.vtol
 
 import android.Manifest
 import android.content.Context
@@ -43,9 +29,9 @@ import androidx.core.content.ContextCompat
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.LifecycleOwner
 import com.google.common.util.concurrent.ListenableFuture
-import com.ml.quaterion.facenetdetection.databinding.ActivityMainBinding
-import com.ml.quaterion.facenetdetection.model.FaceNetModel
-import com.ml.quaterion.facenetdetection.model.Models
+import com.ml.quaterion.vtol.databinding.ActivityMainBinding
+import com.ml.quaterion.vtol.model.FaceNetModel
+import com.ml.quaterion.vtol.model.Models
 import java.io.*
 import java.util.concurrent.Executors
 
@@ -354,7 +340,7 @@ class MainActivity : AppCompatActivity() {
             flush()
             close()
         }
-        sharedPreferences.edit().putBoolean( SHARED_PREF_IS_DATA_STORED_KEY , true ).apply()
+        sharedPreferences.edit().apply{ putBoolean( SHARED_PREF_IS_DATA_STORED_KEY , true )}
     }
 
 

@@ -1,21 +1,6 @@
-/*
- * Copyright 2023 Shubham Panchal
- * Licensed under the Apache License, Version 2.0 (the "License");
- * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package com.ml.quaterion.facenetdetection
+package com.ml.quaterion.vtol
 
 import android.content.Context
-import android.graphics.Camera
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Matrix
@@ -25,6 +10,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import androidx.camera.core.CameraSelector
 import androidx.core.graphics.toRectF
+import androidx.core.graphics.toColorInt
 
 // Defines an overlay on which the boxes and text will be drawn.
 class BoundingBoxOverlay( context: Context , attributeSet: AttributeSet )
@@ -36,7 +22,7 @@ class BoundingBoxOverlay( context: Context , attributeSet: AttributeSet )
     var frameHeight = 0
     var frameWidth = 0
 
-    var cameraFacing : Int = CameraSelector.LENS_FACING_FRONT
+    private var cameraFacing : Int = CameraSelector.LENS_FACING_FRONT
 
     // This var is assigned in FrameAnalyser.kt
     var faceBoundingBoxes: ArrayList<Prediction>? = null
@@ -48,7 +34,7 @@ class BoundingBoxOverlay( context: Context , attributeSet: AttributeSet )
 
     // Paint for boxes and text
     private val boxPaint = Paint().apply {
-        color = Color.parseColor("#4D90caf9")
+        color = "#4D90caf9".toColorInt()
         style = Paint.Style.FILL
     }
     private val textPaint = Paint().apply {
@@ -76,8 +62,8 @@ class BoundingBoxOverlay( context: Context , attributeSet: AttributeSet )
     override fun onDraw(canvas: Canvas?) {
         if (faceBoundingBoxes != null) {
             if (!areDimsInit) {
-                val viewWidth = canvas!!.width.toFloat()
-                val viewHeight = canvas.height.toFloat()
+                val viewWidth = width.toFloat()
+                val viewHeight = height.toFloat()
                 val xFactor: Float = viewWidth / frameWidth.toFloat()
                 val yFactor: Float = viewHeight / frameHeight.toFloat()
                 // Scale and mirror the coordinates ( required for front lens )

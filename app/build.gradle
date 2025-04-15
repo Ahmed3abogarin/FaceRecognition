@@ -6,7 +6,7 @@ plugins {
 android {
     compileSdk 33
     defaultConfig {
-        applicationId "com.ml.quaterion.facenetdetection"
+        applicationId "com.vtol"
         minSdk 25
         targetSdk 33
         versionCode 1

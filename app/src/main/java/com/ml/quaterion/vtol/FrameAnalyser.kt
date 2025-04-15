@@ -1,23 +1,8 @@
-/*
- * Copyright 2023 Shubham Panchal
- * Licensed under the Apache License, Version 2.0 (the "License");
- * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package com.ml.quaterion.facenetdetection
+package com.ml.quaterion.vtol
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
@@ -25,20 +10,22 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
-import com.ml.quaterion.facenetdetection.model.FaceNetModel
-import com.ml.quaterion.facenetdetection.model.MaskDetectionModel
+import com.ml.quaterion.vtol.model.FaceNetModel
+import com.ml.quaterion.vtol.model.MaskDetectionModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.pow
 import kotlin.math.sqrt
+import androidx.core.graphics.createBitmap
 
 // Analyser class to process frames and produce detections.
-class FrameAnalyser( context: Context ,
-                     private var boundingBoxOverlay: BoundingBoxOverlay ,
-                     private var model: FaceNetModel
-                     ) : ImageAnalysis.Analyzer {
+class FrameAnalyser(
+    context: Context,
+    private var boundingBoxOverlay: BoundingBoxOverlay,
+    private var model: FaceNetModel,
+) : ImageAnalysis.Analyzer {
 
     private val realTimeOpts = FaceDetectorOptions.Builder()
             .setPerformanceMode( FaceDetectorOptions.PERFORMANCE_MODE_FAST )
@@ -87,7 +74,7 @@ class FrameAnalyser( context: Context ,
 
             // Rotated bitmap for the FaceNet model
             val cameraXImage = image.image!!
-            var frameBitmap = Bitmap.createBitmap( cameraXImage.width , cameraXImage.height , Bitmap.Config.ARGB_8888 )
+            var frameBitmap = createBitmap(cameraXImage.width, cameraXImage.height)
             frameBitmap.copyPixelsFromBuffer( image.planes[0].buffer )
             frameBitmap = BitmapUtils.rotateBitmap( frameBitmap , image.imageInfo.rotationDegrees.toFloat() )
             //val frameBitmap = BitmapUtils.imageToBitmap( image.image!! , image.imageInfo.rotationDegrees )

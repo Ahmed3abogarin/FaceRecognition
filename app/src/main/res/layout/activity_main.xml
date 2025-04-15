@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.ml.quaterion.vtol.MainActivity">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/preview_view"
@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.ml.quaterion.facenetdetection.BoundingBoxOverlay
+    <com.ml.quaterion.vtol.BoundingBoxOverlay
         android:id="@+id/bbox_overlay"
         android:layout_width="0dp"
         android:layout_height="0dp"
